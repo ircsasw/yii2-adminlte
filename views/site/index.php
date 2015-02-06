@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
+Yii::$app->params['subtitle'] = 'BASIC';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!-- Small boxes (Stat box) -->

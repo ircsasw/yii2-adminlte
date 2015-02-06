@@ -371,21 +371,29 @@ AppAsset::register($this);
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
           <section class="content-header">
+            <?php if (isset($this->title)) { ?>
             <h1>
-              Dashboard
-              <small>Control panel</small>
+                <?= Html::encode($this->title) ?>
+                <?php if (strlen(Yii::$app->params['subtitle'])>0) { ?>
+                <small>
+                    <?= Yii::$app->params['subtitle'] ?>
+                </small>
+                <?php } ?>
             </h1>
-            <ol class="breadcrumb">
-              <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-              <li class="active">Dashboard</li>
-            </ol>
+            <?php } ?>
+            <?= Breadcrumbs::widget([
+                //'itemTemplate' => '<li>{link}<span class="divider"><i class="fa fa-angle-right arrow-icon"> </i></span></li>',
+                'homeLink' => [
+                    'label' => 'Inicio',
+                    'url' => Yii::$app->homeUrl,
+                    'template' => '<li><i class="fa fa-home home-icon"></i> {link} </i></span></li>',
+                ],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
           </section>
 
           <!-- Main content -->
           <section class="content">
-              <?= Breadcrumbs::widget([
-                  'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-              ]) ?>
               <?= $content ?>
           </section><!-- /.content -->
 
